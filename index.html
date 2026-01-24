@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Lívia Almeida</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playwrite+FR+Moderne:wght@100..400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./images/snow-flake.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="a11y-controls">
+            <button id="btn-contrast" aria-label="Alternar Alto Contraste" title="Alto Contraste">🌓</button>
+            <button id="btn-dyslexia" aria-label="Modo de Leitura Fácil" title="Fonte para Dislexia">📖</button>
+            
+            <div class="font-controls">
+                <button id="btn-font-minus" aria-label="Diminuir fonte">A-</button>
+                <button id="btn-font-reset" aria-label="Fonte normal">A</button>
+                <button id="btn-font-plus" aria-label="Aumentar fonte">A+</button>
+            </div>
+        </div>
+
+        <div class="language-toggle">
+            <button id="btn-pt" class="lang-btn active">PT</button>
+            <button id="btn-en" class="lang-btn">EN</button>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <h1 class="logo">Lívia Almeida</h1>
+            
+            <button class="mobile-menu-btn" aria-label="Abrir Menu" aria-expanded="false">☰</button>
+    
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#about" data-i18n="nav_about">Sobre</a></li>
+                    <li><a href="#projects" data-i18n="nav_projects">Projetos</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero hidden" id="hero">
+            <div class="hero-content">
+                <span class="signature" data-i18n="greeting">Lívia Almeida</span>
+                <h1 class="hero-title" data-i18n="hero_title">Desenvolvimento, Segurança da Informação e Visão Jurídica</h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Construindo software seguro e eficiente. Unindo a prática do Blue Team, a experiência em Gestão de Produtos e a análise de riscos do Direito</p>
+                
+                <div class="hero-btns">
+                    <a href="#projects" class="btn-primary" data-i18n="btn_projects">Ver Projetos</a>
+                    <a href="#contact" class="btn-secondary" data-i18n="btn_contact">Contato</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="./images/image.png" alt="Foto de Lívia Almeida" class="avatar">
+            </div>
+        </section>
+
+        <section id="about" class="about hidden">
+            <div class="container">
+                <h2 data-i18n="section_about_title">Sobre</h2>
+                <div class="about-text">
+                    <p data-i18n="about_text_1">Sou Lívia Almeida, profissional focada na intersecção entre tecnologia, regulamentação e gestão.</p>
+                    <p data-i18n="about_text_2">Minha base acadêmica em Direito (FDCI, 2019) formou a base da minha conduta profissional: capacidade analítica para lidar com conformidade e gestão de riscos, resiliência sob pressão, gestão de rotinas dinâmicas e atendimento e foco no cliente. Já cursando Engenharia de Software (iínicio em 2023), expandi essa visão para a tecnologia, atuando como Estagiária de Product Owner na Apiki Wordpress, onde vivenciei na prática o agile e pude apoiar os Product Owners em suas demandas de trabalho.</p>
+                    <p data-i18n="about_text_3">Hoje, me dedico à convergência dessas áreas: o Desenvolvimento na construção de soluções, aplicação da estratégia de Blue Team para blindá-las e a Gestão de Produto para orquestrar a entrega.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects hidden">
+            <div class="container">
+                <h2 data-i18n="section_projects_title">Projetos Recentes</h2>
+
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div class="card-image"><img src="./images/engine.png" alt="Engrenagens"></div>
+                        <div class="card-content">
+                            <h3 data-i18n="project_title_1">Em desenvolvimento...</h3>
+                            <p data-i18n="project_desc_1">Ops! Ainda estamos em obras por aqui. Peço desculpas pela indisponibilidade momentânea :(</p>
+                            <div class="tech-stack"><span>...</span><span>...</span></div>
+                            <div class="card-links">
+                                <a href="https://github.com/livialmeida" target="_blank" rel="noopener noreferrer" class="btn-code">
+                                    <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                    <span data-i18n="btn_code">Ver Código</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="card-image"><img src="./images/engine.png" alt="Engrenagens"></div>
+                        <div class="card-content">
+                            <h3 data-i18n="project_title_2">Em desenvolvimento...</h3>
+                            <p data-i18n="project_desc_2">Ops! Ainda estamos em obras por aqui. Peço desculpas pela indisponibilidade momentânea :(</p>
+                            <div class="tech-stack"><span>...</span><span>...</span></div>
+                            <div class="card-links">
+                                <a href="https://github.com/livialmeida" target="_blank" rel="noopener noreferrer" class="btn-code">
+                                    <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                    <span data-i18n="btn_code">Ver Código</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="card-image"><img src="./images/engine.png" alt="Engrenagens"></div>
+                        <div class="card-content">
+                            <h3 data-i18n="project_title_3">Em desenvolvimento...</h3>
+                            <p data-i18n="project_desc_3">Ops! Ainda estamos em obras por aqui. Peço desculpas pela indisponibilidade momentânea :(</p>
+                            <div class="tech-stack"><span>...</span><span>...</span></div>
+                            <div class="card-links">
+                                <a href="https://github.com/livialmeida" target="_blank" rel="noopener noreferrer" class="btn-code">
+                                    <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                    <span data-i18n="btn_code">Ver Código</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="contact-section hidden">
+            <div class="container">
+                <h2 class="section-title" data-i18n="section_contact_title">Vamos trabalhar juntos?</h2>
+                <p class="contact-subtitle" data-i18n="contact_subtitle">Estou disponível para novos projetos e oportunidades.</p>
+
+                <div class="contact-grid">
+                    <a href="https://www.linkedin.com/in/liviadasnevesalmeida/" target="_blank" rel="noopener noreferrer" class="btn-contact">
+                        <svg class="icon-contact" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        LinkedIn
+                    </a>
+
+                    <a href="https://github.com/livialmeida" target="_blank" rel="noopener noreferrer" class="btn-contact">
+                        <svg class="icon-contact" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        GitHub
+                    </a>
+
+                    <a href="#" class="btn-contact" id="btn-email-secure" 
+                       data-user="liviadasnevesalmeida" 
+                       data-domain="gmail.com"
+                       aria-label="Enviar E-mail">
+                        <svg class="icon-contact" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        E-mail
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p data-i18n="footer_rights">&copy; <span id="year">2026</span> Lívia Almeida. Todos os direitos reservados.</p>
+            <p class="credits">Desenvolvido com <span class="heart">❤</span> e muito código.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
