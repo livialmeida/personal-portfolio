@@ -276,4 +276,366 @@ button:focus-visible, a:focus-visible {
     .nav-menu ul { flex-direction: column; padding: 20px; text-align: center; }
     .projects-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     .footer-content { flex-direction: column; gap: 10px; }
+}/* --- 1. VARIABLES AND FONTS --- */
+:root {
+    --bg-body: #ffffff;
+    --bg-surface: #f9f9f9;
+    --text-heading: #1a1a1a;
+    --text-body: #4a4a4a;
+    --color-primary: #d90368; /* Raspberry */
+    --color-primary-light: rgba(217, 3, 104, 0.08);
+    --border-color: #eee;
+    --gradient-hero: radial-gradient(rgba(217, 3, 104, 0.15) 1.5px, transparent 1.5px);
+    
+    /* Defined Fonts */
+    --font-main: 'Outfit', sans-serif;
+    --font-display: 'Playwrite FR Moderne', cursive;
+
+    /* Font Sizes */
+    --font-size-body: 1rem;
+    --font-size-h1: clamp(1.8rem, 4vw, 2.5rem);
+    --font-size-h1: clamp(1.5rem, 3vw, 2rem);
+    --font-size-h3: 1.25rem;
+}
+
+/* High Contrast Mode */
+body.high-contrast {
+    --bg-body: #000000;
+    --bg-surface: #111111;
+    --text-heading: #ffffff;
+    --text-body: #ffff00;
+    --color-primary: #ff69b4;
+    --color-primary-light: #333;
+    --border-color: #333;
+    --gradient-hero: none;
+}
+
+/* Dyslexia Mode */
+body.dyslexia-mode {
+    --font-main: 'Comic Sans MS', 'Verdana', sans-serif !important;
+    --font-display: 'Comic Sans MS', 'Verdana', sans-serif !important;
+    line-height: 1.8 !important;
+    letter-spacing: 0.05em !important;
+    word-spacing: 0.1em !important;
+}
+
+/* --- 2. GENERAL --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 100%; scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+
+/* Special Fonts */
+.signature, .logo { font-family: var(--font-display); }
+
+/* Accessible Focus */
+button:focus-visible, a:focus-visible {
+    outline: 3px solid var(--color-primary); outline-offset: 2px;
+}
+
+/* --- 3. TOP BAR --- */
+.top-bar {
+    width: 100%;
+    background-color: var(--bg-body);
+}
+
+.top-bar .header-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.a11y-controls, .font-controls { display: flex; gap: 8px; align-items: center; }
+.a11y-controls button {
+    background: none; border: 1px solid var(--border-color);
+    color: var(--text-heading); cursor: pointer; padding: 4px 8px; border-radius: 4px;
+}
+.a11y-controls button:hover { background-color: var(--color-primary-light); }
+
+.language-toggle {
+    display: flex; border: 1px solid var(--color-primary); border-radius: 50px; padding: 2px;
+}
+.lang-btn {
+    background: transparent; border: none; cursor: pointer;
+    font-size: 0.75rem; font-weight: 600; color: var(--color-primary);
+    padding: 2px 10px; border-radius: 50px; transition: all 0.3s;
+}
+.lang-btn.active { background-color: var(--color-primary); color: #fff; }
+
+/* --- 4. HEADER --- */
+.main-header {
+    padding: 5px 0; background-color: var(--bg-body);
+    position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.header-container {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+}
+.logo { font-size: 1.2rem; font-weight: 700; color: var(--text-heading); }
+
+.nav-menu ul { list-style: none; display: flex; gap: 30px; }
+.nav-menu a {
+    text-decoration: none; color: var(--text-body); font-weight: 500; transition: color 0.2s;
+}
+.nav-menu a:hover { color: var(--color-primary); }
+
+/* --- 5. HERO --- */
+.hero {
+    position: relative; display: flex; align-items: center; justify-content: space-between;
+    padding: 40px 10%; min-height: 80vh; gap: 40px;
+    background-color: var(--bg-body); background-image: var(--gradient-hero); background-size: 32px 32px;
+}
+.hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 200px;
+    background: linear-gradient(to bottom, transparent 0%, var(--bg-body) 100%);
+    z-index: 1; pointer-events: none;
+}
+.hero-content, .hero-image { position: relative; z-index: 2; }
+
+.signature { font-size: 1.2rem; color: var(--color-primary); display: block; margin-bottom: 10px; }
+.hero-content h1 { font-size: 2.5rem; color: var(--text-heading); margin: 0 0 20px; line-height: 1.2; }
+.hero-content p { font-size: 1.125rem; line-height: 1.6; max-width: 600px; margin-bottom: 2rem; }
+.hero-btns { margin-top: 30px; display: flex; gap: 15px; }
+.btn-primary, .btn-secondary { padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: 600; }
+.btn-primary { background-color: var(--color-primary); color: #fff; }
+.btn-secondary { border: 1px solid var(--color-primary); color: var(--color-primary); }
+
+/* Avatar Correction: Added fixed height for perfect circle */
+.avatar { 
+    width: 300px; 
+    object-fit: cover; 
+    border-radius: 50%; 
+    border: 4px solid var(--color-primary); 
+}
+
+/* --- 6. ABOUT --- */
+.about { padding: 80px 0; background-color: var(--bg-surface); }
+.about .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.about h2 { font-size: 2rem; color: var(--text-heading); margin-bottom: 2rem; }
+.about-text p { margin-bottom: 1rem; line-height: 1.6; }
+
+/* --- 7. PROJECTS --- */
+.projects { padding: 80px 0; background-color: var(--bg-body); }
+.projects .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.projects h2 { font-size: 2rem; color: var(--text-heading); margin-bottom: 2rem; }
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+/* Project Card Style */
+.project-card {
+    background: var(--bg-body);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(217, 3, 104, 0.15);
+    border-color: rgba(217, 3, 104, 0.3);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    background-color: #e5e5e5;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+/* Image Zoom Effect */
+.project-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-content { padding: 16px; display: flex; flex-direction: column; flex-grow: 1; }
+.card-content h3 { font-size: 1.1rem; color: var(--text-heading); margin-bottom: 0.5rem; }
+
+.tech-stack { display: flex; gap: 5px; margin: 10px 0; flex-wrap: wrap; }
+.tech-stack span { 
+    font-size: 0.7rem; 
+    font-weight: 600;
+    background: var(--color-primary-light); 
+    color: var(--color-primary); 
+    padding: 2px 8px; 
+    border-radius: 12px; 
+}
+
+/* Card Links Container (Plural) */
+.card-links { 
+    margin-top: auto; 
+    padding-top: 12px; 
+    border-top: 1px solid var(--border-color); 
+}
+
+.btn-code {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font-size: 0.85rem; font-weight: 600; color: var(--color-primary);
+    border: 1px solid var(--color-primary); border-radius: 50px; padding: 6px 16px;
+    background: transparent; transition: all 0.3s;
+}
+.btn-code:hover { background-color: var(--color-primary); color: #fff; }
+
+/* --- 8. CONTACT --- */
+.contact-section {
+    padding: 100px 20px; text-align: center;
+    background: linear-gradient(to bottom, var(--bg-body) 0%, var(--bg-surface) 100%);
+}
+.contact-grid { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 40px; }
+.btn-contact {
+    display: inline-flex; align-items: center; gap: 10px; min-width: 160px; padding: 14px 28px;
+    text-decoration: none; font-weight: 600; color: var(--color-primary);
+    background: var(--bg-body); border: 2px solid var(--color-primary);
+    border-radius: 50px; transition: all 0.3s;
+}
+.btn-contact:hover { background-color: var(--color-primary); color: #fff; transform: translateY(-3px); }
+
+/* --- 9. FOOTER --- */
+.site-footer {
+    background-color: var(--color-primary); color: #fff; padding: 40px 20px;
+    text-align: center; position: relative; z-index: 10;
+}
+.footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; }
+.heart { color: #ffb6c1; animation: heartbeat 1.5s infinite; display: inline-block; }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+/* --- 10. ANIMATIONS AND MOBILE --- */
+.hidden { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+.show { opacity: 1; transform: translateY(0); }
+
+/* Mobile Button Correction: Added border none */
+.mobile-menu-btn { 
+    display: none; 
+    background: none; 
+    border: none; 
+    font-size: 1.5rem; 
+    color: var(--text-heading); 
+    cursor: pointer; 
+}
+
+@media (max-width: 768px) {
+    /* 1. HERO: Added negative margin-top to visually 'close' the gap */
+    .hero { 
+        flex-direction: column-reverse; 
+        padding: 60px 5%; 
+        text-align: center;
+        
+        /* FIX: Pulls Hero up by 2px to hide any phantom white line/gap */
+        margin-top: -2px !important; 
+        position: relative;
+        z-index: 1; /* Sits behind the header */
+    }
+    
+    .hero::after { display: none; }
+    .mobile-menu-btn { display: block; }
+
+    /* 2. HEADER: Brute force removal of borders and shadows */
+    .main-header {
+        padding: 0 !important;
+        
+        /* FIX: Removes any trace of desktop border/shadow */
+        border: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+        
+        /* Ensures Sticky works and sits ABOVE the hero */
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #fff; /* Ensures solid background */
+    }
+
+    .header-container { 
+        padding: 10px 24px; 
+    }
+    
+    /* Menu Correction */
+    .nav-menu {
+        position: absolute; top: 70px; right: 0; width: 100%;
+        background: var(--bg-body); 
+        max-height: 0; 
+        overflow: hidden;
+        transition: max-height 0.3s ease-out; 
+        border-bottom: none; 
+    }
+    
+    .nav-menu.active { 
+        max-height: 300px; 
+        border-bottom: 1px solid var(--border-color); 
+    }
+    
+    .nav-menu ul { flex-direction: column; padding: 20px; text-align: center; }
+
+    /* --- TITLE (Accessibility/Break Fix) --- */
+    .hero-title {
+        /* CLAMP: Defines Min (1.5rem) and Max (2.2rem) */
+        font-size: clamp(1.5rem, 5vw + 1rem, 2.2rem) !important;
+        line-height: 1.2;
+        margin-top: 20px;
+        
+        /* SAFETY: Breaks long words (like "Desenvolvimento") */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    /* Clamp for Logo to prevent overflowing */
+    .logo {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+    }
+
+    /* --- BUTTONS (Cut-off fix) --- */
+    .hero-btns {
+        display: flex;
+        flex-direction: column; 
+        width: 100%;
+        align-items: center;
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .hero-btns a, .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        
+        /* Allows text to break lines INSIDE the button */
+        white-space: normal; 
+        text-align: center;
+        padding: 15px 20px;
+        
+        /* Font limit for the button */
+        font-size: clamp(0.9rem, 4vw, 1.1rem) !important;
+    }
+
+    /* --- IMAGE --- */
+    .hero-image {
+        margin-top: 30px;
+    }
+
+    .projects-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .footer-content { flex-direction: column; gap: 10px; }
 }
