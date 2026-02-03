@@ -6,7 +6,7 @@ Bem-vindo ao repositório do meu portfólio pessoal. Este projeto tangibiliza mi
 
 Tendo anos de experiência de atendimento ao público em tribunais, priorizei a acessibilidade na execução deste projeto. Entendo que algo "mínimo" pode gerar muito trabalho para ser feito, mas é exatamente isso que pode mudar a percepção/entendimento de alguém. 
 
-"Em tudo amar e servir". - Santo Inácio de Loyola 🙏
+"Em tudo **amar** e **servir**". - Santo Inácio de Loyola 🙏
 
 ---
 
@@ -24,6 +24,7 @@ A inclusão não foi tratada como uma "feature", mas como base do sistema. Não 
 Aplicação de princípios de *Security Hardening* em ambiente estático:
 * **Mitigação de Spam:** Para evitar a captura do e-mail por bots de varredura, a tag `mailto:` não existe no HTML estático. Um script JavaScript monta o endereço apenas mediante interação humana (clique), ofuscando o dado sensível. Para maior proteção do e-mail, não utilizei o meu pessoal 😉
 * **Proteção contra Reverse Tabnabbing:** Todos os links externos (`target="_blank"`) forçam o uso de `rel="noopener noreferrer"`, prevenindo vulnerabilidades de phishing na aba de origem.
+**OPSEC & Proteção de Identidade:** A utilização de um avatar ilustrativo ao invés de uma foto pessoal não é apenas uma escolha estética, mas uma medida de **Privacidade e Contra-Inteligência**. Após vivenciar situações reais de engenharia social com a utilização indevida de imagem para fraude, adotei a ocultação da face em repositórios públicos como controle preventivo, reduzindo a superfície de ataque para a coleta de dados (OSINT) e personificação.
 
 ### 3. Arquitetura de Internacionalização (i18n)
 * **O Desafio:** Criar um sistema bilíngue (PT/EN) leve e sem dependências.
