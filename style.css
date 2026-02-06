@@ -406,3 +406,13 @@ button:focus-visible, a:focus-visible {
     .projects-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     .footer-content { flex-direction: column; gap: 10px; }
 }
+
+@media (min-width: 768px) and (max-width: 1080px) {
+    .top-bar {
+        padding-right: 5%;
+    }
+
+    .header-container {
+        padding: 0px 5%;
+    }
+}
