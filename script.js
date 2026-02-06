@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. VARIÁVEIS DE ESTADO E CACHE ---
-    const langCache = {}; // Guarda as traduções para não baixar o mesmo arquivo 2x
-    let currentFontSize = 100; // Tamanho base da fonte em %
+    // --- 1. STATE VARIABLES AND CACHE ---
+    const langCache = {}; // Stores loaded translations to prevent re-fetching
+    let currentFontSize = 100; // Base font-size
 
-    // --- 2. SELETORES (Elementos do DOM) ---
-    // Usamos const para garantir que a referência não mude
+    // --- 2. SELECTORS (DOM elements) ---
     const btnPt = document.getElementById('btn-pt');
     const btnEn = document.getElementById('btn-en');
     const btnContrast = document.getElementById('btn-contrast');
@@ -15,47 +13,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailBtn = document.getElementById('btn-email-secure');
     const yearSpan = document.getElementById('year');
 
-    // --- 3. FUNÇÕES DE INTERNACIONALIZAÇÃO (i18n) ---
-    
+    // --- 3. INTERNATIONALIZATION FUNCTION (i18n) ---
     async function setLanguage(lang) {
         try {
             let translations;
 
-            // Verifica se já baixamos esse idioma antes (Cache)
+            // Check if we have already downloaded this language before (Cache)
             if (langCache[lang]) {
                 translations = langCache[lang];
             } else {
-                // Se não, busca o arquivo JSON
+                // If not, fetch the JSON file
                 const response = await fetch(`./i18n/${lang}.json`);
                 
                 if (!response.ok) throw new Error(`Erro ao carregar idioma: ${lang}`);
                 
                 translations = await response.json();
-                langCache[lang] = translations; // Salva no cache
+                langCache[lang] = translations; // Save to cache
             }
 
             applyTranslations(translations);
             updateLangButtons(lang);
             
-            // Salva a preferência do usuário
+            // Save user preference
             localStorage.setItem('preferredLang', lang);
             
-            // Atualiza o atributo lang do HTML (bom para SEO e leitores de tela)
+            // Update HTML lang attribute (useful for SEO and screen readers)
             document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
+            eggConsoleStatus()
+
         } catch (error) {
-            console.error("Erro crítico no i18n:", error);
-            // Fallback: Se der erro, não faz nada ou avisa o usuário
+            console.error("Critical error in i18n:", error);
+            // Fallback: If an error occurs, do nothing or alert the user
         }
     }
 
     function applyTranslations(translations) {
-        // Busca todos os elementos que têm o atributo data-i18n
+        // Find all the elements with the data-i18n attribute
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
-            // Se a chave existir no JSON, atualiza o texto
+            // If the key exists int he JSON, atualiza o texto
             if (translations[key]) {
-                // Se for um input ou textarea, usa placeholder/value, senão textContent
+                // If it's an input or textarea, use placeholder/value, otherwise textContent
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     element.placeholder = translations[key];
                 } else {
@@ -66,26 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateLangButtons(lang) {
-        // Remove a classe active de todos e adiciona só no atual
+        // Remove active class from all and add only to the current one 
         if (btnPt) btnPt.classList.toggle('active', lang === 'pt');
         if (btnEn) btnEn.classList.toggle('active', lang === 'en');
     }
 
-    // --- 4. FUNÇÕES DE ACESSIBILIDADE ---
-
-    // Alto Contraste
+    // --- 4. ACCESSIBILITY FUNCTIONS ---
+    // High Contrast
     if (btnContrast) {
         btnContrast.addEventListener('click', () => {
             document.body.classList.toggle('high-contrast');
-            // Salva true ou false no localStorage
+            // Save true or false to localStorage
             const isActive = document.body.classList.contains('high-contrast');
             localStorage.setItem('highContrast', isActive);
-            // Acessibilidade: Avisa o leitor de tela que o botão foi pressionado
+            // Accessibility: Notify screen reader that the button was pressed
             btnContrast.setAttribute('aria-pressed', isActive);
         });
     }
 
-    // Modo Dislexia
+    // Dyslexia Mode
     if (btnDyslexia) {
         btnDyslexia.addEventListener('click', () => {
             document.body.classList.toggle('dyslexia-mode');
@@ -95,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Controle de Tamanho da Fonte
+    // Font Size Control
     window.adjustFont = (action) => {
         if (action === 'increase' && currentFontSize < 150) currentFontSize += 10;
         else if (action === 'decrease' && currentFontSize > 70) currentFontSize -= 10;
@@ -105,14 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('fontSize', currentFontSize);
     };
 
-    // Listeners dos botões de fonte
+    // Font button listeners
     document.getElementById('btn-font-plus')?.addEventListener('click', () => adjustFont('increase'));
     document.getElementById('btn-font-minus')?.addEventListener('click', () => adjustFont('decrease'));
     document.getElementById('btn-font-reset')?.addEventListener('click', () => adjustFont('reset'));
 
-    // --- 5. UI & NAVEGAÇÃO ---
-
-    // Menu Mobile
+    // --- 5. UI & NAVIGATION ---
+    // Mobile Menu
     if (mobileBtn && navMenu) {
         mobileBtn.addEventListener('click', () => {
             const isActive = navMenu.classList.toggle('active');
@@ -120,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileBtn.textContent = isActive ? '✕' : '☰'; // Troca ícone
         });
 
-        // Fechar menu ao clicar em um link (UX básica)
+        // Close menu when clicking a link (Basic UX)
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -135,60 +132,100 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
-                // Opcional: Parar de observar depois de aparecer a primeira vez
-                // observer.unobserve(entry.target); 
             }
         });
-    }, { threshold: 0.1 }); // Dispara quando 10% do elemento aparece
+    }, { threshold: 0.1 }); // Fires when 10% of the element appears
 
     document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
 
-    // --- 6. SEGURANÇA (E-mail Ofuscado) ---
-    // Isso evita que bots de spam peguem seu e-mail direto no HTML
+    // --- 6. SECURITY (Obfuscated E-mail) ---
+    // This prevents spam bots from scraping your email directly from the HTML
     if (emailBtn) {
         emailBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Evita comportamento padrão do link vazio
+            e.preventDefault(); // Prevent default behavior of empty link
             const user = emailBtn.getAttribute('data-user');
             const domain = emailBtn.getAttribute('data-domain');
             
-            // Cria o link mailto dinamicamente apenas no clique
+            // Dynamically create the mailto link only on click
             window.location.href = `mailto:${user}@${domain}`;
         });
     }
 
-    // --- 7. INICIALIZAÇÃO (Boot) ---
+    // --- 7. EASTER EGGS (The "das Neves" console logic)
+    // Detects browser language to delivery the right punchline/professional context
+    function eggConsoleStatus() {
+        const savedLang = localStorage.getItem('preferredLang');
+        const browserLang = navigator.language || navigator.userLanguage;
+        const isPortuguese = savedLang === 'pt' || (!savedLang && browserLang.startsWith('pt'));
+        console.clear();
+
+        if (isPortuguese) {
+            // BRASIL/PORTUGAL (Dev Humor + Ice Reference)
+            console.log(
+                "%c❄️ LÍVIA DAS NEVES | BLUE TEAM",
+                "background: #0284c7; color: #fff; padding: 5px 10px; border-radius: 4px; font-family: monospace; font-weight: bold;"
+            ); 
+            console.log(
+                "%cStatus: Sistema Operante. \nO sobrenome 'das Neves' garante proteção extra contra superaquecimento da CPU.",
+                "color: #0369a1; font-family: monospace;"
+            ); 
+        } else {
+            // INTERNATIONAL (Legal Authority + Career Transition)
+            console.log(
+                "%c❄️ LÍVIA DAS NEVES | SECURITY ENGINEER",
+                "background: #0284c7; color: #fff; padding: 5px 10px; border-radius: 4px; font-family: monospace; font-weight: bold;"
+            );
+            console.log(
+                "%cDefending rights since 2019. Securing code since 2023. \nFun fact: 'das Neves' means 'of the Snows'. \nKeeping your data cool, compliant, and safe.",
+                "color: #0369a1; font-family: monospace; line-height: 1.5;"
+            );
+        }
+    }
+
+    // Keep the tab title trick (lightweight and fun)
+    function eggTabTitle() {
+        let originalTitle = document.title;
+        window.addEventListener('blur', () => {document.title = "Volta aqui! 🥶"; });
+        window.addEventListener('focus', () => {document.title = originalTitle; });
+    }
+
+    // --- 8. INITIALIZATION (Boot) ---
     function init() {
-        // Data automática no Footer
+        // Automatic date in Footer
         if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-        // Recuperar Idioma
+        // Retrieve language
         const savedLang = localStorage.getItem('preferredLang') || 'pt';
         setLanguage(savedLang);
 
-        // Recuperar Alto Contraste
+        // Retrieve high contrast
         if (localStorage.getItem('highContrast') === 'true') {
             document.body.classList.add('high-contrast');
             if(btnContrast) btnContrast.setAttribute('aria-pressed', 'true');
         }
 
-        // Recuperar Modo Dislexia
+        // Retrieve dyslexia mode
         if (localStorage.getItem('dyslexiaMode') === 'true') {
             document.body.classList.add('dyslexia-mode');
             if(btnDyslexia) btnDyslexia.setAttribute('aria-pressed', 'true');
         }
 
-        // Recuperar Tamanho da Fonte
+        // Retrieve font size
         const savedFont = localStorage.getItem('fontSize');
         if (savedFont) {
             currentFontSize = parseInt(savedFont);
             document.documentElement.style.fontSize = `${currentFontSize}%`;
         }
 
-        // Listeners de Idioma
+        // Language listeners
         if(btnPt) btnPt.addEventListener('click', () => setLanguage('pt'));
         if(btnEn) btnEn.addEventListener('click', () => setLanguage('en'));
+
+        // Load easter eggs
+        eggConsoleStatus();
+        eggTabTitle();
     }
 
-    // Rodar a inicialização
+    // Run initialization
     init();
 });
